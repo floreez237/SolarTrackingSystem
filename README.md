@@ -1,0 +1,2 @@
+# SolarTrackingSystem
+STARTUP PROJECT
