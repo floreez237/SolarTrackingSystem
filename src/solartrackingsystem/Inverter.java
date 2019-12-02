@@ -11,7 +11,7 @@ package solartrackingsystem;
  */
 public class Inverter {
     private double inputVoltage;
-
+    private Load load;// You will use this to get the total Power
     public Inverter() {
     }
 
@@ -19,7 +19,9 @@ public class Inverter {
         this.inputVoltage = inputVoltage;
     }
 
+    @SuppressWarnings("empty-statement")
     public double getInputVoltage() {
+        
         return inputVoltage;
     }
 

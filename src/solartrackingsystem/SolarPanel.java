@@ -10,22 +10,25 @@ package solartrackingsystem;
  * @author flori
  */
 public class SolarPanel {
-
-    private double photoVDemand;
+    private static final double TSCH = 1.0;// give a value for this
+    private double photoVDemand; // what is this
     private double totalEnergy;
     private double safetyFactor;
     private double averagePower;
     private double panelVoltage;
     private double shortCircuitCurrent;
     private double solarPanelUnitPrice;
+    private Inverter inverter;// I have added this so as to calculate system current
 
     public SolarPanel() {
     }
 
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public void setInverter(Inverter inverter) {
+        this.inverter = inverter;
     }
 
+    
+    
     public double getPhotoVDemand() {
         return photoVDemand;
     }
@@ -99,12 +102,12 @@ public class SolarPanel {
 
     public double computeAveragePeakPower() {
 
-        return 1.0;
+        return this.computePVDemand() / TSCH;
     }
 
     public double computePVDemand() {
-
-        return 1.0;
+        
+        return totalEnergy/safetyFactor;
     }
 
     public double computeTotalSolarPanelCost() {
@@ -113,7 +116,7 @@ public class SolarPanel {
 
     public double computeCurentOfSystem(){
         
-        return 1.0;
+        return this.computeAveragePeakPower() / inverter.getInputVoltage();
     }
 
 }
