@@ -101,7 +101,6 @@ public class SolarPanel {
 
     public int computeNumberPanelsInParallel() {
 
-        return 1;
         return (int)Math.ceil(this.computeCurentOfSystem() / panelCurrent);
     }
 
