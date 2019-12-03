@@ -16,6 +16,7 @@ public class SolarPanel {
     private double safetyFactor;
     private double averagePower;
     private double panelVoltage;
+    private double panelCurrent;
     private double shortCircuitCurrent;
     private double solarPanelUnitPrice;
     private Inverter inverter;// I have added this so as to calculate system current
@@ -25,6 +26,14 @@ public class SolarPanel {
 
     public void setInverter(Inverter inverter) {
         this.inverter = inverter;
+    }
+
+    public double getPanelCurrent() {
+        return panelCurrent;
+    }
+
+    public void setPanelCurrent(double panelCurrent) {
+        this.panelCurrent = panelCurrent;
     }
 
     
@@ -87,17 +96,18 @@ public class SolarPanel {
 
     public int computeNumberPanelsInSeries() {
 
-        return 1;
+        return (int)Math.ceil(inverter.getInputVoltage() / panelCurrent);
     }
 
     public int computeNumberPanelsInParallel() {
 
         return 1;
+        return (int)Math.ceil(this.computeCurentOfSystem() / panelCurrent);
     }
 
     public int computeTotalNumberOfPanels() {
 
-        return 1;
+        return this.computeNumberPanelsInParallel() * this.computeNumberPanelsInSeries();
     }
 
     public double computeAveragePeakPower() {

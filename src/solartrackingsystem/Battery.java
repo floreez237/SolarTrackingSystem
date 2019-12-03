@@ -10,22 +10,19 @@ package solartrackingsystem;
  * @author flori
  */
 public class Battery {
-    private double batteryStoarageCapacity;
     private double batteryVolatage;
     private int numberOfBackupDays;
     private double depthOfDischarge;
+    private SolarPanel solarPanel;
 
     public Battery() {
     }
 
-    public double getBatteryStoarageCapacity() {
-        return batteryStoarageCapacity;
+    public void setSolarPanel(SolarPanel solarPanel) {
+        this.solarPanel = solarPanel;
     }
 
-    public void setBatteryStoarageCapacity(double batteryStoarageCapacity) {
-        this.batteryStoarageCapacity = batteryStoarageCapacity;
-    }
-
+    
     public double getBatteryVolatage() {
         return batteryVolatage;
     }
@@ -51,14 +48,14 @@ public class Battery {
     }
     
     public double computeBatteryStorageCapacity(){
-        return 1.0;
+        return solarPanel.computePVDemand() * numberOfBackupDays / (depthOfDischarge * batteryVolatage);
     }
     
     public int computeNumberOfBatteriesInSeries(){
         return 1;
     }
     
-    public int computeNumberPanelsInParallel(){
+    public int computeNumberBatteriesInParallel(){
         return 1;
     }
     public int computeTotalNumberOfBatteries(){// you made error in UML here
