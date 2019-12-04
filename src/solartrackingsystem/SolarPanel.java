@@ -10,8 +10,7 @@ package solartrackingsystem;
  * @author flori
  */
 public class SolarPanel {
-    private static final double TSCH = 1.0;// give a value for this//it is better we set it a var since it varies from one country to the other
-    private double photoVoltaicDemand; // what is this// the energy demand to be produced by the panel
+    private  double tsch;
     private double totalEnergy;
     private double safetyFactor;
     private double averagePower;
@@ -22,6 +21,14 @@ public class SolarPanel {
     private Inverter inverter;// I have added this so as to calculate system current
 
     public SolarPanel() {
+    }
+
+    public double getTsch() {
+        return tsch;
+    }
+
+    public void setTsch(double tsch) {
+        this.tsch = tsch;
     }
 
     public void setInverter(Inverter inverter) {
@@ -37,15 +44,6 @@ public class SolarPanel {
     }
 
     
-    
-    public double getPhotoVDemand() {
-        return photoVoltaicDemand;
-    }
-
-    public void setPhotoVDemand(double photoVDemand) {
-        this.photoVoltaicDemand = photoVDemand;
-    }
-
     public double getTotalEnergy() {
         return totalEnergy;
     }
@@ -111,7 +109,7 @@ public class SolarPanel {
 
     public double computeAveragePeakPower() {
 
-        return this.computePVDemand() / TSCH;
+        return this.computePVDemand() / this.tsch;
     }
 
     public double computePVDemand() {

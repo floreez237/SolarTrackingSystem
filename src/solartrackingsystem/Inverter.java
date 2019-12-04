@@ -12,16 +12,16 @@ package solartrackingsystem;
 public class Inverter {
     private double inputVoltage;
     private Load load;// You will use this to get the total Power
+    private SolarPanel solarPanel;
+    
     public Inverter() {
     }
 
     public Inverter(double inputVoltage) {
         this.inputVoltage = inputVoltage;
     }
-
-    @SuppressWarnings("empty-statement")
+    
     public double getInputVoltage() {
-        
         return inputVoltage;
     }
 
@@ -30,7 +30,15 @@ public class Inverter {
     }
     
     public double computeInverterPower(){
-        return 1.0;
+        return load.computeSytemPower() / solarPanel.getSafetyFactor();
+    }
+
+    public void setSolarPanel(SolarPanel solarPanel) {
+        this.solarPanel = solarPanel;
+    }
+
+    public void setLoad(Load load) {
+        this.load = load;
     }
     
   

@@ -10,25 +10,37 @@ package solartrackingsystem;
  * @author flori
  */
 public class Battery {
-    private double batteryVolatage;
+    private double volatage;
     private int numberOfBackupDays;
     private double depthOfDischarge;
     private SolarPanel solarPanel;
+    private double capacity;
+    private Inverter inverter;
 
     public Battery() {
     }
+    
+    
 
     public void setSolarPanel(SolarPanel solarPanel) {
         this.solarPanel = solarPanel;
     }
 
-    
-    public double getBatteryVolatage() {
-        return batteryVolatage;
+    public double getCapacity() {
+        return capacity;
     }
 
-    public void setBatteryVolatage(double batteryVolatage) {
-        this.batteryVolatage = batteryVolatage;
+    public void setCapacity(double capacity) {
+        this.capacity = capacity;
+    }
+
+    
+    public double getVolatage() {
+        return volatage;
+    }
+
+    public void setVolatage(double volatage) {
+        this.volatage = volatage;
     }
 
     public int getNumberOfBackupDays() {
@@ -48,17 +60,22 @@ public class Battery {
     }
     
     public double computeBatteryStorageCapacity(){
-        return solarPanel.computePVDemand() * numberOfBackupDays / (depthOfDischarge * batteryVolatage);
+        return solarPanel.computePVDemand() * numberOfBackupDays / (depthOfDischarge * volatage);
     }
     
     public int computeNumberOfBatteriesInSeries(){
-        return 1;
+        return (int)Math.ceil(inverter.getInputVoltage() / this.volatage);
     }
     
     public int computeNumberBatteriesInParallel(){
-        return 1;
+        return (int)Math.ceil(computeTotalNumberOfBatteries() / computeNumberOfBatteriesInSeries());
     }
-    public int computeTotalNumberOfBatteries(){// you made error in UML here
-        return 1;
+    public int computeTotalNumberOfBatteries(){
+        
+        return (int)Math.ceil(this.computeBatteryStorageCapacity() / this.capacity);
+    }
+
+    public void setInverter(Inverter inverter) {
+        this.inverter = inverter;
     }
 }
