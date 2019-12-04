@@ -10,8 +10,8 @@ package solartrackingsystem;
  * @author flori
  */
 public class SolarPanel {
-    private static final double TSCH = 1.0;// give a value for this
-    private double photoVDemand; // what is this
+    private static final double TSCH = 1.0;// give a value for this//it is better we set it a var since it varies from one country to the other
+    private double photoVoltaicDemand; // what is this// the energy demand to be produced by the panel
     private double totalEnergy;
     private double safetyFactor;
     private double averagePower;
@@ -39,11 +39,11 @@ public class SolarPanel {
     
     
     public double getPhotoVDemand() {
-        return photoVDemand;
+        return photoVoltaicDemand;
     }
 
     public void setPhotoVDemand(double photoVDemand) {
-        this.photoVDemand = photoVDemand;
+        this.photoVoltaicDemand = photoVDemand;
     }
 
     public double getTotalEnergy() {
